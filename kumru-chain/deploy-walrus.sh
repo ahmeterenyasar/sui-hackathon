@@ -47,6 +47,9 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "🎉 Projeniz artık Walrus Sites üzerinde yayında!"
     echo ""
+    echo "📝 NOT: ws-resources.json dosyasını güncellemeyi unutmayın:"
+    echo "   object_id alanına deployment çıktısındaki object ID'yi ekleyin"
+    echo ""
     echo "📝 Çıktıdaki Walrus Site URL'yi kopyalayıp paylaşabilirsiniz."
 else
     echo ""

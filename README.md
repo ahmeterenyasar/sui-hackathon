@@ -26,7 +26,9 @@ cd ../move
 sui client publish --gas-budget 100000000
 ```
 
-Deploy sonrası aldığınız **Package ID**'yi `kumru-chain/src/CreateProfile.tsx` dosyasındaki `PACKAGE_ID` değişkenine ekleyin:
+Deploy sonrası aldığınız **Package ID**'yi şu dosyalardaki `PACKAGE_ID` değişkenine ekleyin:
+- `kumru-chain/src/CreateProfile.tsx`
+- `kumru-chain/src/Dashboard.tsx`
 
 ```typescript
 const PACKAGE_ID = 'YOUR_PACKAGE_ID_HERE'
@@ -72,10 +74,14 @@ site-builder publish --epochs 1 ./dist
 ├── kumru-chain/               # React frontend
 │   ├── src/
 │   │   ├── App.tsx            # Ana uygulama & routing
+│   │   ├── Dashboard.tsx      # Profil yönetimi dashboard
 │   │   ├── CreateProfile.tsx  # Profil oluşturma formu
 │   │   ├── ProfileView.tsx    # Profil görüntüleme
 │   │   ├── main.tsx           # Web3 provider setup
 │   │   └── index.css          # Animasyonlu arka plan
+│   ├── public/
+│   │   └── _redirects         # Walrus Sites routing
+│   ├── ws-resources.json      # Walrus Sites config
 │   └── package.json
 └── README.md
 ```
@@ -91,11 +97,20 @@ site-builder publish --epochs 1 ./dist
 
 ## 📝 Kullanım
 
+### Dashboard
+
+1. Ana sayfadan "Dashboard" butonuna tıklayın
+2. Profiliniz yoksa oluşturma formu görünür
+3. Profiliniz varsa:
+   - Sol tarafta profil önizlemesi
+   - Sağ tarafta düzenleme formu
+   - "Düzenle" butonuna tıklayarak linklerinizi güncelleyebilirsiniz
+
 ### Profil Oluşturma
 
 1. "Cüzdan Bağla" butonuna tıklayın
 2. Sui cüzdanınızı seçin ve bağlayın
-3. "Profil Oluştur" butonuna tıklayın
+3. Dashboard'a gidin veya "Profil Oluştur" butonuna tıklayın
 4. Bio, avatar URL ve linklerinizi girin
 5. Transaction'ı onaylayın
 6. Sui Explorer'da kontrol edin!
@@ -107,7 +122,7 @@ Profil URL formatı:
 /profile/{OBJECT_ID}
 ```
 
-Object ID'yi Sui Explorer'dan alabilirsiniz.
+Object ID'yi Dashboard'dan veya Sui Explorer'dan alabilirsiniz.
 
 ## 🧪 Test
 
@@ -169,11 +184,15 @@ MIT License
 
 Bu proje şu ek özelliklere sahiptir:
 
+- ✨ **Dashboard** - Profillerinizi görüntüleme ve düzenleme
+- 🎯 **Real-time Önizleme** - Değişiklikleri anında görün
 - ✨ **Avatar desteği** - Profil resmi ekleyebilirsiniz
 - 🎯 **Dinamik linkler** - Sınırsız sayıda link ekleyebilirsiniz
 - 🔍 **Title + URL** - Her link için açıklayıcı başlık
 - 🎨 **Modern UI** - Gradient'ler ve animasyonlu arka plan
 - 📱 **Responsive** - Mobil uyumlu tasarım
+- 🔄 **Update fonksiyonu** - Mevcut profilleri güncelleyin
+- 🌐 **Walrus Sites** - Tam on-chain hosting
 
 ## 🐛 Bilinen Sorunlar
 

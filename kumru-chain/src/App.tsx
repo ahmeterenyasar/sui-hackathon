@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit'
 import CreateProfile from './CreateProfile'
 import ProfileView from './ProfileView'
+import Dashboard from './Dashboard'
 import './App.css'
 
 function Home() {
@@ -23,12 +24,20 @@ function Home() {
             <p className="text-white/70 mb-4">
               Cüzdan: <span className="font-mono">{account.address.slice(0, 6)}...{account.address.slice(-4)}</span>
             </p>
-            <Link
-              to="/create"
-              className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105"
-            >
-              Profil Oluştur
-            </Link>
+            <div className="flex gap-4 justify-center">
+              <Link
+                to="/dashboard"
+                className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl text-white font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all transform hover:scale-105"
+              >
+                📊 Dashboard
+              </Link>
+              <Link
+                to="/create"
+                className="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105"
+              >
+                ➕ Profil Oluştur
+              </Link>
+            </div>
           </div>
         ) : (
           <div>
@@ -85,6 +94,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<CreateProfile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile/:objectId" element={<ProfileView />} />
         </Routes>
       </div>

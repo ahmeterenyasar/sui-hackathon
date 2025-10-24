@@ -181,6 +181,19 @@ Deploy sonrası göreceğiniz URL'yi kaydedin:
 
 Bu URL'yi paylaşabilirsiniz!
 
+### 3.5. ws-resources.json Güncelle (Opsiyonel)
+
+Deployment çıktısındaki Object ID'yi `ws-resources.json` dosyasına kaydedin:
+
+```json
+{
+  "site_name": "OnChain LinkTree",
+  "object_id": "0xYOUR_WALRUS_OBJECT_ID"
+}
+```
+
+Bu, gelecekteki güncellemelerde aynı URL'yi korumanızı sağlar.
+
 ---
 
 ## 🔍 Adım 4: Doğrulama

@@ -51,15 +51,19 @@ export default function CreateProfile() {
     try {
       const tx = new Transaction()
       
-      // vector<vector<u8>> için encoding
+      // Bio ve avatar için tek vector<u8> (string değil)
+      const bioBytes = Array.from(new TextEncoder().encode(bio))
+      const avatarBytes = Array.from(new TextEncoder().encode(avatarUrl))
+      
+      // Her link için vector<u8> array'i
       const linkTitlesBytes = links.map(link => Array.from(new TextEncoder().encode(link.title)))
       const linkUrlsBytes = links.map(link => Array.from(new TextEncoder().encode(link.url)))
 
       tx.moveCall({
         target: `${PACKAGE_ID}::profile::create_profile`,
         arguments: [
-          tx.pure(bcs.vector(bcs.string()).serialize([bio])),
-          tx.pure(bcs.vector(bcs.string()).serialize([avatarUrl])),
+          tx.pure(bcs.vector(bcs.u8()).serialize(bioBytes)),
+          tx.pure(bcs.vector(bcs.u8()).serialize(avatarBytes)),
           tx.pure(bcs.vector(bcs.vector(bcs.u8())).serialize(linkTitlesBytes)),
           tx.pure(bcs.vector(bcs.vector(bcs.u8())).serialize(linkUrlsBytes)),
         ],
@@ -70,20 +74,20 @@ export default function CreateProfile() {
         {
           onSuccess: (result) => {
             console.log('Profil oluşturuldu:', result)
-            alert('Profil başarıyla oluşturuldu! Explorer\'da transaction\'ı kontrol edebilirsiniz.')
-            navigate('/')
+            alert('Profil başarıyla oluşturuldu! Dashboard\'da görebilirsiniz.')
+            navigate('/dashboard')
             setIsLoading(false)
           },
           onError: (err) => {
             console.error('Hata:', err)
-            setError('Profil oluşturulurken bir hata oluştu')
+            setError(`Profil oluşturulurken bir hata oluştu: ${err.message || err}`)
             setIsLoading(false)
           },
         }
       )
-    } catch (err) {
+    } catch (err: any) {
       console.error('Transaction hatası:', err)
-      setError('Transaction oluşturulurken bir hata oluştu')
+      setError(`Transaction oluşturulurken bir hata oluştu: ${err.message || err}`)
       setIsLoading(false)
     }
   }
