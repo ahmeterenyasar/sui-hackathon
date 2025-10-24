@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit'
 import CreateProfile from './CreateProfile'
 import ProfileView from './ProfileView'
+import ProfileByName from './ProfileByName'
 import Dashboard from './Dashboard'
 import './App.css'
 
@@ -96,6 +97,7 @@ function App() {
           <Route path="/create" element={<CreateProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile/:objectId" element={<ProfileView />} />
+          <Route path="/p/:name" element={<ProfileByName />} />
         </Routes>
       </div>
 

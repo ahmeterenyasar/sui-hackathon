@@ -5,7 +5,8 @@ import { bcs } from '@mysten/sui/bcs'
 import { useNavigate } from 'react-router-dom'
 
 // Move kontratınızı deploy ettikten sonra buraya package ID'yi ekleyin
-const PACKAGE_ID = 'YOUR_PACKAGE_ID_HERE'
+const PACKAGE_ID = '0x870c5abaa14474681f5cc45130512a48193755721da928c583cadf77f76363c8'
+const REGISTRY_ID = '0x722e5eed3a2e6fde53b8e4ea6bfb0d5fda9419333cadaf3270649f373a37ab21'
 
 interface LinkInput {
   title: string
@@ -17,6 +18,7 @@ export default function CreateProfile() {
   const navigate = useNavigate()
   const { mutate: signAndExecute } = useSignAndExecuteTransaction()
 
+  const [username, setUsername] = useState('')
   const [bio, setBio] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
   const [links, setLinks] = useState<LinkInput[]>([{ title: '', url: '' }])
@@ -51,6 +53,9 @@ export default function CreateProfile() {
     try {
       const tx = new Transaction()
       
+      // Username için bytes
+      const nameBytes = Array.from(new TextEncoder().encode(username))
+      
       // Bio ve avatar için tek vector<u8> (string değil)
       const bioBytes = Array.from(new TextEncoder().encode(bio))
       const avatarBytes = Array.from(new TextEncoder().encode(avatarUrl))
@@ -62,6 +67,8 @@ export default function CreateProfile() {
       tx.moveCall({
         target: `${PACKAGE_ID}::profile::create_profile`,
         arguments: [
+          tx.object(REGISTRY_ID), // Registry objesi
+          tx.pure(bcs.vector(bcs.u8()).serialize(nameBytes)), // İsim
           tx.pure(bcs.vector(bcs.u8()).serialize(bioBytes)),
           tx.pure(bcs.vector(bcs.u8()).serialize(avatarBytes)),
           tx.pure(bcs.vector(bcs.vector(bcs.u8())).serialize(linkTitlesBytes)),
@@ -74,6 +81,21 @@ export default function CreateProfile() {
         {
           onSuccess: (result) => {
             console.log('Profil oluşturuldu:', result)
+            
+            // Created objects'ten Profile'i bul
+            const effects = (result as any).effects
+            if (effects?.created) {
+              const profileObj = effects.created.find((obj: any) => 
+                obj.owner && typeof obj.owner === 'object' && 'Shared' in obj.owner
+              )
+              
+              if (profileObj) {
+                // Profile ID'yi localStorage'a kaydet
+                localStorage.setItem(`profile_${account.address}`, profileObj.reference.objectId)
+                console.log('Profile ID saved:', profileObj.reference.objectId)
+              }
+            }
+            
             alert('Profil başarıyla oluşturuldu! Dashboard\'da görebilirsiniz.')
             navigate('/dashboard')
             setIsLoading(false)
@@ -113,6 +135,27 @@ export default function CreateProfile() {
         <h1 className="text-3xl font-bold text-white mb-8">Profil Oluştur</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Username */}
+          <div>
+            <label className="block text-white font-medium mb-2">
+              Kullanıcı Adı *
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
+              placeholder="ornek: johndoe"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/40 transition-colors"
+              required
+              pattern="[a-z0-9]+"
+              minLength={3}
+              maxLength={20}
+            />
+            <p className="text-white/50 text-sm mt-1">
+              Sadece küçük harf ve rakam. Bu isim ile profilinize erişilebilir: /p/{username || 'kullaniciadi'}
+            </p>
+          </div>
+
           {/* Bio */}
           <div>
             <label className="block text-white font-medium mb-2">
