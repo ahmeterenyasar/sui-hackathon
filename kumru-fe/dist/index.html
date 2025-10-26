@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" class="dark-theme" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kumru - On-Chain Profile</title>
+
+    <style>
+      /*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+      }
+      body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+      #root,
+      #__next {
+        isolation: isolate;
+      }
+      
+      /* Animations */
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BA36iNtu.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-VkVqEY7f.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- Vanta.js Birds Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
+  </body>
+</html>
