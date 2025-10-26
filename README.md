@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![Kumru Banner](./screenshots/name.png)
-
 **A fully decentralized LinkTree alternative built on Sui blockchain and hosted on Walrus Sites**
 
 [![Sui Network](https://img.shields.io/badge/Sui-Testnet-6366f1?style=for-the-badge&logo=sui)](https://sui.io)
