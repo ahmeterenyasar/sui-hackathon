@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Kumru Banner](https://via.placeholder.com/1200x300/6366f1/ffffff?text=Kumru+-+Decentralized+LinkTree)
+![Kumru Banner](./screenshots/name.png)
 
 **A fully decentralized LinkTree alternative built on Sui blockchain and hosted on Walrus Sites**
 
@@ -11,7 +11,7 @@
 [![SuiNS](https://img.shields.io/badge/SuiNS-Enabled-f59e0b?style=for-the-badge)](https://suins.io)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-[Live Demo](#) • [Documentation](#) • [Video Demo](#)
+[Live Demo](https://kurmu.trwal.app)
 
 </div>
 
@@ -59,6 +59,16 @@ Kumru enables users to:
 6. **Host on Walrus** - Completely decentralized frontend hosting
 
 Think of it as LinkTree meets Web3 - where you truly own your digital identity.
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+![Home Page](./screenshots/home.png)
+
+### Explore Profiles
+![Explore Page](./screenshots/explore.png)
 
 ---
 
