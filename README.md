@@ -9,7 +9,7 @@
 [![SuiNS](https://img.shields.io/badge/SuiNS-Enabled-f59e0b?style=for-the-badge)](https://suins.io)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-[Live Demo](https://kurmu.trwal.app)
+[Live Demo](https://kumru.trwal.app/)
 
 </div>
 
